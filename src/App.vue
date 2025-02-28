@@ -6,7 +6,7 @@ let count = ref(0);
 
 <template>
   <div class="container content section">
-    <button class="button is-primary" v-on:click="count++">Click me</button>
+    <button class="button is-primary" @click="count++">Click me</button>
     <p></p>
     <h>{{ count }}</h>
   </div>
