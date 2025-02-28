@@ -1,23 +1,14 @@
 <script setup>
-import { onMounted } from 'vue';
+import { ref } from "vue";
+let count = ref(0);
 
-onMounted(() => { 
-const button = document.QuerySelector('#btn');
-let count = document.QuerySelector('#count');
-let i = 0;
-count.innerHTML = i;
-console.log(button);
-button.addEventListener('click', () => {
-i++;
-count.innerHTML = i;
-});
-});
 </script>
 
 <template>
   <div class="container content section">
-    <button id="btn" class="button is-primary">Click me</button>
-    <h1 id="count"></h1>
+    <button class="button is-primary" v-on:click="count++">Click me</button>
+    <p></p>
+    <h>{{ count }}</h>
   </div>
 
 </template>
