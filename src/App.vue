@@ -1,18 +1,32 @@
 <script setup>
 import { ref } from "vue";
-let message = ref('Hello vue');
+let message = ref("");
+let items = ref(["Piim", "Sai", "Viin"]);
 
+function addItem() {
+  if(message.value.trim() !== ''){
+  items.value.push(message.value.trim());  
+  }
+  message.value='';
+}
 </script>
 
 <template>
   <div class="container content section">
-    <input class="input" type="text" v-model="message">
-    <h1>{{ message.split('').reverse().join('') }}</h1>
-    
+    <div class="field has-addons">
+      <div class="control is-expanded">
+        <input class="input" type="text" v-model="message" @keydown.enter="addItem" />
+      </div>
+      <div class="control">
+        <button class="button is-info" @click="addItem">
+          Add item
+        </button>
+      </div>
+    </div>
+    <ul>
+      <li v-for="item in items">{{ item }}</li>
+    </ul>
   </div>
-
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>
