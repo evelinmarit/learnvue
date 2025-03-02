@@ -2,11 +2,11 @@ import { createApp } from 'vue';
 import App from './App.vue';
 import './index.css';
 
-import { createWebHistory, createRouter } from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router';
 
-import Modals from "./pages/Modals.vue";
-import ToDo from "./pages/ToDo.vue";
-import MyCat from "./pages/MyCat.vue";
+import Modals from './pages/Modals.vue';
+import MyCat from './pages/MyCat.vue';
+import ToDo from './pages/ToDo.vue';
 
 const routes = [
   { path: '/', component: Modals, name: 'Modals' },

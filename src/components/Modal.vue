@@ -1,5 +1,5 @@
 <script setup>
-defineProps(["active"]);
+defineProps(['active']);
 </script>
 
 <template>

@@ -1,6 +1,5 @@
 <script setup>
-import RouterTabs from "./components/RouterTabs.vue";
-
+import RouterTabs from './components/RouterTabs.vue';
 </script>
 
 

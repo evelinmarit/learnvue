@@ -19,8 +19,5 @@
     "@rsbuild/core": "^1.2.8",
     "@rsbuild/plugin-vue": "^1.0.5"
   },
-  "trustedDependencies": [
-    "@biomejs/biome",
-    "core-js"
-  ]
+  "trustedDependencies": ["@biomejs/biome", "core-js"]
 }

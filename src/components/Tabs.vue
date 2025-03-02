@@ -1,12 +1,12 @@
 <script setup>
-import { ref } from "vue";
+import { ref } from 'vue';
 defineProps(['items']);
-let emit = defineEmits(['change']);
-let active = ref(0);
+const emit = defineEmits(['change']);
+const active = ref(0);
 
-function setActive(key){
-    active.value = key;
-    emit('change', key);
+function setActive(key) {
+  active.value = key;
+  emit('change', key);
 }
 </script>
 

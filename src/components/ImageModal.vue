@@ -1,5 +1,5 @@
 <script setup>
-import Modal from "./Modal.vue";
+import Modal from './Modal.vue';
 defineProps(['active', 'url']);
 </script>
 
