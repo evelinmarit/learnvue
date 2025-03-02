@@ -1,8 +1,8 @@
 h
 <script setup>
 import { ref } from "vue";
-import Modal from "./components/Modal.vue";
-import ImageModal from "./components/ImageModal.vue";
+import Modal from "../components/Modal.vue";
+import ImageModal from "../components/ImageModal.vue";
 let modalActive = ref(false);
 let modalActive2 = ref(false);
 let modalActive3 = ref(false);
@@ -10,7 +10,7 @@ let modalActive4 = ref(false);
 </script>
 
 <template>
-  <div class="container content section">
+
     <div class="buttons">
       <button class="button is-primary" @click="modalActive = true">
         Open modal
@@ -25,7 +25,7 @@ let modalActive4 = ref(false);
         Open modal 4
       </button>
     </div>
-  </div>
+
   <ImageModal
     :active="modalActive"
     @close="modalActive = false"
