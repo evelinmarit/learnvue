@@ -5,13 +5,13 @@ import './index.css';
 import { createRouter, createWebHistory } from 'vue-router';
 
 import Modals from './pages/Modals.vue';
-import MyCat from './pages/MyCat.vue';
 import ToDo from './pages/ToDo.vue';
+import ChuckNorris from './pages/ChuckNorris.vue';
 
 const routes = [
   { path: '/', component: Modals, name: 'Modals' },
   { path: '/todo', component: ToDo, name: 'ToDo' },
-  { path: '/mycat', component: MyCat, name: 'My Cat' },
+  { path: '/chuck', component: ChuckNorris, name: 'Chuck Norris' },
 ];
 
 const router = createRouter({

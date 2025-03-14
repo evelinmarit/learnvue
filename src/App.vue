@@ -6,6 +6,9 @@ import RouterTabs from './components/RouterTabs.vue';
 <template>
     <RouterTabs></RouterTabs>
     <div class="container section content">
-        <routerView></routerView>
+        <Suspense>
+            <routerView></routerView>
+        </Suspense>
+        
     </div>
 </template>
