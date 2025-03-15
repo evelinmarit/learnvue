@@ -5,7 +5,7 @@ let { pagination, current } = defineProps(['pagination', 'current']);
 
 const pages = computed(() => {
   const pages = [];
-  for(let i = 1; i<=3; i++){
+  for(let i = 1; i<=3 && i<=pagination.pages; i++){
     pages[i]=i;
   }
   if(current>5){
