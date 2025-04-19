@@ -8,6 +8,7 @@ Peale projekti loomist VSCode avamiseks käsk: code .
 index.css faili on kopeeritud ligipääs Bulmale (lehelt: https://bulma.io/documentation/start/installation/)
 
 Käivita terminalis käsuga: bun run dev
+Serveri käivitamiseks (seotud Chat.vue-ga) teises terminali aknas käsk: bun bin/server.js
 
 # Rsbuild project
 
