@@ -8,16 +8,26 @@ const messages = ref([]);
 const res = await axios.get("http://localhost:3001/messages");
 messages.value = res.data;
 
-const evtSource = new EventSource("http://localhost:3001/messages/sse");
-evtSource.onmessage = (event) => {
-    messages.value.push(...JSON.parse(event.data));
-};
+// Create WebSocket connection.
+const socket = new WebSocket("ws://localhost:3001/ws");
+
+// Connection opened
+socket.addEventListener("open", (event) => {
+  
+});
+
+// Listen for messages
+socket.addEventListener("message", (event) => {
+  messages.value.push({message: event.data });
+});
+
 
 async function send() {
-  const res = await axios.post("http://localhost:3001/messages", {
-    message: message.value,
-  });
-  message.value = "";
+//   const res = await axios.post("http://localhost:3001/messages", {
+//     message: message.value,
+//   });
+  socket.send(message.value);  
+  message.value = '';
 }
 </script>
 <template>
