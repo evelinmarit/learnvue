@@ -12,6 +12,10 @@ const delay = (delayInms) => {
     return new Promise(resolve => setTimeout(resolve, delayInms));
   };
 
+  function sendSSEMessage(controller, data) {
+    controller.enqueue(`event: test\ndata: ${JSON.stringify(data)}\n\n`);
+  }
+
 Bun.serve({
     port: 3001,
     idleTimeout: 0,
@@ -23,23 +27,47 @@ Bun.serve({
             return new Response('', cors)
         },
         GET: async(req) => {
-            const query = new URL(req.url).searchParams;
-            let filtered;
-            do {
-                await delay(1000);
-                filtered = messages.filter(message => message.time > new Date(query.get('date')))
-            } while(filtered.length === 0 && messages.length !== 0); 
-            
-            return Response.json(filtered, cors)
+            return Response.json(messages, cors)
         },
         POST: async req => {
           const body = await req.json();
           messages.push({time: new Date(), message: body.message});
           return Response.json(body, cors);
         },
-      },      
+      }, 
+      "/messages/sse": {
+        GET: async(req) => {
+          let lastDate = new Date();
+          let filtered = [];
+          const { signal } = req;
+          return new Response(
+            new ReadableStream({
+              start(controller) {
+                const interval = setInterval(() => {
+                  filtered = messages.filter(message => message.time > lastDate);
+                  lastDate = new Date();
+                  sendSSEMessage(controller, filtered);
+                }, 1000);
+
+                signal.onabort = () => {
+                  clearInterval(interval);
+                  controller.close();
+                };
+              }
+            }),
+            {
+              status: 200,
+              headers: {
+                "Content-Type": "text/event-stream",
+                "Cache-Control": "no-cache",
+                "Connection": "keep-alive",
+                ...cors.headers
+              }
+            }
+          );
+        },
+      }
     },
-  
     // (optional) fallback for unmatched routes:
     // Required if Bun's version < 1.2.3
     fetch(req) {

@@ -7,25 +7,11 @@ const messages = ref([]);
 
 const res = await axios.get("http://localhost:3001/messages");
 messages.value = res.data;
-let lastMessageDate = res.data[res.data.length - 1]?.time;
 
-longPoll();
-
-function longPoll() {
-  axios
-    .get("http://localhost:3001/messages", {
-      params: {
-        date: lastMessageDate,
-      },
-    })
-    .then((res) => {
-      if (res.data.length) {
-        messages.value.push(...res.data);
-        lastMessageDate = res.data[res.data.length - 1]?.time;
-      }
-      longPoll();
-    });
-}
+const evtSource = new EventSource("http://localhost:3001/messages/sse");
+evtSource.onmessage = (event) => {
+    messages.value.push(...JSON.parse(event.data));
+};
 
 async function send() {
   const res = await axios.post("http://localhost:3001/messages", {
